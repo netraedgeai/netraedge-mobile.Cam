@@ -32,16 +32,25 @@ class _NvrHomeScreenState extends State<NvrHomeScreen> {
   late VlcPlayerController _controller3;
   late VlcPlayerController _controller4;
 
-  @override
+    @override
   void initState() {
     super.initState();
-    // Replace with your actual RTSP streams via Mediamtx / Cloudflare tunnel
-    const String sampleRtsp = "rtsp://admin:password@your_tunnel_url/stream";
     
-    _controller1 = VlcPlayerController.network(sampleRtsp, hwAcc: HwAcc.auto, autoPlay: true, options: VlcPlayerOptions());
-    _controller2 = VlcPlayerController.network(sampleRtsp, hwAcc: HwAcc.auto, autoPlay: true, options: VlcPlayerOptions());
-    _controller3 = VlcPlayerController.network(sampleRtsp, hwAcc: HwAcc.auto, autoPlay: true, options: VlcPlayerOptions());
-    _controller4 = VlcPlayerController.network(sampleRtsp, hwAcc: HwAcc.auto, autoPlay: true, options: VlcPlayerOptions());
+    // Apne Cloudflare Tunnel ka URL yahan daalein (jaise: your-tunnel.trycloudflare.com)
+    const String tunnelHost = "YOUR_CLOUDFLARE_TUNNEL_URL"; 
+    const String username = "admin";
+    const String password = "your_camera_password";
+
+    // 4-Channel ke liye alag-alag streams
+    final String stream1 = "rtsp://$username:$password@$tunnelHost/cam1";
+    final String stream2 = "rtsp://$username:$password@$tunnelHost/cam2";
+    final String stream3 = "rtsp://$username:$password@$tunnelHost/cam3";
+    final String stream4 = "rtsp://$username:$password@$tunnelHost/cam4";
+    
+    _controller1 = VlcPlayerController.network(stream1, hwAcc: HwAcc.auto, autoPlay: true, options: VlcPlayerOptions());
+    _controller2 = VlcPlayerController.network(stream2, hwAcc: HwAcc.auto, autoPlay: true, options: VlcPlayerOptions());
+    _controller3 = VlcPlayerController.network(stream3, hwAcc: HwAcc.auto, autoPlay: true, options: VlcPlayerOptions());
+    _controller4 = VlcPlayerController.network(stream4, hwAcc: HwAcc.auto, autoPlay: true, options: VlcPlayerOptions());
   }
 
   @override
