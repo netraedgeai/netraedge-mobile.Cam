@@ -6,27 +6,28 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - name: Checkout Code
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Set up Java
+      - name: Set up Java Development Kit
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
           java-version: '17'
 
-      - name: Set up Flutter Environment
-        uses: subosito/flutter-action@v2
+      - name: Set up Flutter SDK
+        uses: subosito/flutter-action@vv2.18.0
         with:
           flutter-version: '3.19.6'
           channel: 'stable'
+          cache: true
 
-      - name: Get Dependencies
+      - name: Install Pub Dependencies
         run: flutter pub get
 
-      - name: Build APK Release
+      - name: Build Release APK File
         run: flutter build apk --release
 
       - name: Upload APK Artifact
